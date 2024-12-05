@@ -8,7 +8,7 @@ import translationEn from "./locales/en-US.json";
 import translationSr from "./locales/sr-RS.json";
 
 const resources = {
-    "pt-BR": { translation: translationSr },
+    "sr-RS": { translation: translationSr },
     "en-US": { translation: translationEn },
 };
 

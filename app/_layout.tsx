@@ -4,10 +4,11 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { getLocales, getCalendars } from 'expo-localization';
-
 import { useColorScheme } from '@/components/useColorScheme';
+
+import 'react-native-reanimated';
+import '@/i18n';
+
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -47,10 +48,6 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
-  const locales = getLocales();
-  console.log(locales);
-
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
