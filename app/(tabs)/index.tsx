@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 import { useTranslation } from "react-i18next";
+import ChangeLanguage from '@/components/ChangeLanguage';
 
 export default function TabOneScreen() {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ export default function TabOneScreen() {
       <Text style={styles.title}>
         {text}
       </Text>
+      <ChangeLanguage />
     </View>
   );
 }

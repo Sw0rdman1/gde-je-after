@@ -57,11 +57,14 @@ export default ChangeLanguage
 
 const styles = StyleSheet.create({
     container: {
+        height: 100,
+        marginVertical: 20,
+        alignItems: "center",
         justifyContent: "center",
     },
     flagsContainer: {
         flexDirection: "row",
-        paddingVertical: 10,
+        paddingVertical: 5,
     },
     flag: {
         paddingHorizontal: 10,
