@@ -1,4 +1,9 @@
 {
     "language": "Jezik",
-    "helloWorld": "Zdravo svete!"
+    "helloWorld": "Zdravo svete!",
+    "auth": {
+        "login": "Prijavi se",
+        "logout": "Odjavi se",
+        "register": "Registruj se"
+    }
 }

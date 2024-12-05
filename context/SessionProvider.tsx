@@ -9,7 +9,7 @@ interface SessionContextType {
     user: User | null;
     session: Session | null;
     isLoading: boolean;
-    signInWithEmail: (email: string, password: string) => Promise<void>;
+    signInWithEmail: (email: string, password: string) => Promise<string | null>;
     signOut: () => Promise<void>;
 }
 
@@ -29,12 +29,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
             email: email,
             password: password,
         })
-
-        if (error) {
-            Alert.alert(error.message)
-        } else {
-            router.replace('/')
-        }
+        return error?.code ?? null;
     }
 
     const signOut = async () => {

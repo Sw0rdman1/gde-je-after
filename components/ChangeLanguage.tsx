@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
 
-import { Text, View } from './Themed'
+import { Text, View } from './ui/Themed'
 import { AVAILABLE_LANGUAGES } from "@/constants/languages";
 
 const ChangeLanguage = () => {

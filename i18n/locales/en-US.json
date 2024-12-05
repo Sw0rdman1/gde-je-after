@@ -1,4 +1,9 @@
 {
     "language": "Language",
-    "helloWorld": "Hello World"
+    "helloWorld": "Hello World",
+    "auth": {
+        "login": "Log In",
+        "logout": "Log Out",
+        "register": "Register"
+    }
 }

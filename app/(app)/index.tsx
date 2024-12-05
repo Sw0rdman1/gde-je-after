@@ -1,18 +1,25 @@
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
 import ChangeLanguage from '@/components/ChangeLanguage';
 import { useTranslations } from '@/hooks/useTranslations';
+import { Text, View } from '@/components/ui/Themed';
+import Button from '@/components/ui/Button';
+import { useSession } from '@/context/SessionProvider';
 
 export default function TabOneScreen() {
   const dictionary = useTranslations();
+  const { signOut } = useSession();
 
   return (
     <View style={styles.container}>
+      <ChangeLanguage />
       <Text style={styles.title}>
         {dictionary('helloWorld')}
       </Text>
-      <ChangeLanguage />
+      <Button
+        title={dictionary('auth.logout')}
+        onPress={signOut}
+      />
     </View>
   );
 }
