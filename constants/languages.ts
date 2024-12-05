@@ -1,5 +1,5 @@
-const serbianLanguage = 'sr-RS';
-const englishLanguage = 'en-US';
+const serbianLanguage = { langCode: 'sr-RS', name: 'Srpski', flag: '🇷🇸' };
+const englishLanguage = { langCode: 'en-US', name: 'English', flag: '🇺🇸' };
 
 const AVAILABLE_LANGUAGES = [serbianLanguage, englishLanguage];
 

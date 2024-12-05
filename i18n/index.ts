@@ -3,9 +3,10 @@ import { initReactI18next } from "react-i18next";
 import * as Localization from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AVAILABLE_LANGUAGES, serbianLanguage } from "../constants/languages";
-
 import translationEn from "./locales/en-US.json";
 import translationSr from "./locales/sr-RS.json";
+
+const availableLanguages = AVAILABLE_LANGUAGES.map((lang) => lang.langCode);
 
 const resources = {
     "sr-RS": { translation: translationSr },
@@ -14,13 +15,12 @@ const resources = {
 
 const initI18n = async () => {
     let savedLanguage = await AsyncStorage.getItem("language");
-
     if (!savedLanguage) {
         const locale = Localization.getLocales()[0].languageTag;
-        if (AVAILABLE_LANGUAGES.includes(locale)) {
+        if (availableLanguages.includes(locale)) {
             savedLanguage = locale;
         } else {
-            savedLanguage = serbianLanguage
+            savedLanguage = serbianLanguage.langCode;
         }
     }
 
