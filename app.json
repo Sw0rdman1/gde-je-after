@@ -8,6 +8,11 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#332228"
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -33,7 +38,7 @@
             "image": "./assets/images/splash.png",
             "backgroundColor": "#332228"
           },
-          "imageWidth": "100%"
+          "imageWidth": 200
         }
       ]
     ],
