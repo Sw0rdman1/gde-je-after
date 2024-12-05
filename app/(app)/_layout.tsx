@@ -5,6 +5,7 @@ import { useColorScheme } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { Text } from '@/components/Themed';
+import { useSession } from '@/context/SessionProvider';
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -15,13 +16,13 @@ function TabBarIcon(props: {
 
 export default function AppLayout() {
   const colorScheme = useColorScheme();
-  const { session, isLoading } = useSession();
+  const { user, isLoading } = useSession();
 
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
 
-  if (!session) {
+  if (!user) {
     return <Redirect href="/sign-in" />;
   }
 
