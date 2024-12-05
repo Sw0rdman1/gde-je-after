@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import supabase from "@/config/supabase";
 import { router } from "expo-router";
+import { Alert } from "react-native";
 
 
 interface SessionContextType {
@@ -24,8 +25,16 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     const [isLoading, setIsLoading] = useState(true);
 
     const signInWithEmail = async (email: string, password: string) => {
-        console.log(email, password)
-        router.replace('/')
+        const { error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        })
+
+        if (error) {
+            Alert.alert(error.message)
+        } else {
+            router.replace('/')
+        }
     }
 
     const signOut = async () => {
