@@ -4,6 +4,10 @@
     "auth": {
         "login": "Prijavi se",
         "logout": "Odjavi se",
-        "register": "Registruj se"
+        "register": "Registruj se",
+        "email": {
+            "label": "Email",
+            "placeholder": "Unesite email"
+        }
     }
 }

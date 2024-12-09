@@ -4,6 +4,10 @@
     "auth": {
         "login": "Log In",
         "logout": "Log Out",
-        "register": "Register"
+        "register": "Register",
+        "email": {
+            "label": "Email",
+            "placeholder": "e.g. mail@gmail.com"
+        }
     }
 }
