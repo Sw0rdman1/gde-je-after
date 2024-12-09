@@ -7,7 +7,11 @@
         "register": "Register",
         "email": {
             "label": "Email",
-            "placeholder": "e.g. mail@gmail.com"
+            "placeholder": "e.g. mail@gmail.com",
+            "error": {
+                "required": "Email is required",
+                "invalid": "Email is invalid"
+            }
         }
     }
 }

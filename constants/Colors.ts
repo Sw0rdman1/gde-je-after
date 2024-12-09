@@ -8,6 +8,8 @@ export default {
     textHint: '#BDBDBD',
     background: '#FFFFFF',
     tint,
+    error: '#B00020',
+    success: '#00C853',
   },
   dark: {
     textPrimary: '#FFFFFF',
@@ -16,5 +18,7 @@ export default {
     textHint: '#607D8B',
     background: '#121212',
     tint,
+    error: '#CF6679',
+    success: '#81C784',
   },
 };

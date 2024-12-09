@@ -7,7 +7,11 @@
         "register": "Registruj se",
         "email": {
             "label": "Email",
-            "placeholder": "Unesite email"
+            "placeholder": "Unesite email",
+            "error": {
+                "required": "Email je obavezan",
+                "invalid": "Email nije validan"
+            }
         }
     }
 }

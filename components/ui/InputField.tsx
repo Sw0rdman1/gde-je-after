@@ -2,23 +2,29 @@ import { useColors } from '@/hooks/useColors';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TextInput as DefaultTextInput } from 'react-native'
 import { Text, View } from './Themed';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export type TextInputProps = DefaultTextInput['props'];
 
 interface InputFieldProps extends TextInputProps {
     label: string;
-    errors?: string;
-
+    validate?: boolean;
+    errors: string | undefined;
 }
 
 const InputField: React.FC<InputFieldProps> = (props) => {
-    const { label, errors, value, onBlur, ...otherProps } = props;
-    const { tint, textPrimary, textHint, textSecondary } = useColors()
+    const { label, errors, validate, value, onBlur, ...otherProps } = props;
+    const { tint, textPrimary, textHint, error, success, background } = useColors()
     const [isFocused, setIsFocused] = useState(false);
     const [inputStatus, setInputStatus] = useState<'default' | 'error' | 'success'>('default');
 
 
     useEffect(() => {
+        if (!validate) {
+            setInputStatus('default')
+            return
+        }
+
         if (!value) {
             setInputStatus('default')
         } else if (errors) {
@@ -34,30 +40,62 @@ const InputField: React.FC<InputFieldProps> = (props) => {
         onBlur && onBlur(e)
     }
 
-    const statusColor = () => {
+    const statusColor = (isBorder: boolean) => {
+        if (isFocused) {
+            return tint
+        }
+
         switch (inputStatus) {
             case 'error':
-                return 'red'
+                return error
             case 'success':
-                return 'green'
+                return success
             default:
                 return textHint
         }
     }
 
+    const statusIcon = () => {
+        if (isFocused) {
+            return null
+        }
+
+        switch (inputStatus) {
+            case 'error':
+                return <MaterialIcons name="error-outline" size={28} color={error} />
+            case 'success':
+                return <MaterialIcons name="check" size={28} color={success} />
+            default:
+                return null
+        }
+    }
+
     return (
-        <View style={[styles.container, { borderColor: statusColor(), shadowColor: statusColor() }]}>
-            <Text style={[styles.label, { color: isFocused ? tint : textSecondary }]}>
-                {label}
-            </Text>
-            <DefaultTextInput
-                style={[styles.input, { color: textPrimary, }]}
-                value={value}
-                onFocus={() => setIsFocused(true)}
-                onBlur={handleBlur}
-                placeholderTextColor={textHint}
-                {...otherProps}
-            />
+        <View style={styles.inputWithError}>
+            <View style={[styles.container, {
+                borderColor: statusColor(true),
+                shadowColor: statusColor(false),
+            }]}>
+                <Text style={[styles.label, { color: statusColor(true), backgroundColor: background }]}>
+                    {label}
+                </Text>
+                <DefaultTextInput
+                    style={[styles.input, { color: textPrimary, }]}
+                    value={value}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={handleBlur}
+                    placeholderTextColor={textHint}
+                    {...otherProps}
+                />
+                <View style={styles.icon}>
+                    {statusIcon()}
+                </View>
+            </View>
+            <View style={styles.errorContainer}>
+                <Text style={[styles.errorText, { color: error }]}>
+                    {!isFocused && errors}
+                </Text>
+            </View>
         </View>
     )
 }
@@ -65,16 +103,18 @@ const InputField: React.FC<InputFieldProps> = (props) => {
 export default InputField
 
 const styles = StyleSheet.create({
-    container: {
+    inputWithError: {
         marginBottom: 16,
+        gap: 8,
+    },
+    container: {
         borderWidth: 1,
         borderRadius: 32,
         padding: 8,
-        width: '90%',
         position: 'relative',
         shadowOffset: {
             width: 0,
-            height: 4,
+            height: 5,
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
@@ -85,7 +125,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -10,
         left: 16,
-        backgroundColor: '#fff',
         paddingHorizontal: 4,
         fontSize: 16,
         fontWeight: '500',
@@ -95,4 +134,18 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '600',
     },
+    icon: {
+        position: 'absolute',
+        right: 14,
+        top: 14,
+        paddingLeft: 8,
+    },
+    errorContainer: {
+        height: 14,
+        paddingLeft: 12,
+    },
+    errorText: {
+        fontSize: 12,
+        fontWeight: '600',
+    }
 })

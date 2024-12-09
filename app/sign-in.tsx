@@ -1,3 +1,4 @@
+import LogInForm from '@/components/auth/LogInForm';
 import Button from '@/components/ui/Button';
 import InputField from '@/components/ui/InputField';
 import { View } from '@/components/ui/Themed';
@@ -23,18 +24,7 @@ export default function SignInScreen() {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <InputField
-                label={dictionary('auth.email.label')}
-                placeholder={dictionary('auth.email.placeholder')}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-            />
-            <Button
-                title={dictionary('auth.login')}
-                onPress={signIn}
-                loading={loading}
-            />
+            <LogInForm />
         </View>
     );
 }
