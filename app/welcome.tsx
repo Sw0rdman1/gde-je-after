@@ -1,39 +1,39 @@
-import { useVideoPlayer, VideoSource, VideoView } from 'expo-video';
+import { Text, View } from '@/components/ui/Themed';
+import VideoBackground from '@/components/ui/VideoBackground';
 import { StyleSheet } from 'react-native';
-
-const assetId = require('../assets/videos/welcome.mp4');
-
-const videoSource: VideoSource = {
-    assetId,
-    metadata: {
-        title: 'Big Buck Bunny',
-        artist: 'The Open Movie Project',
-    },
-}
 
 
 export default function VideoScreen() {
-    const player = useVideoPlayer(videoSource, player => {
-        player.loop = true;
-        player.play();
-    });
 
     return (
-        <VideoView
-            style={styles.video}
-            player={player}
-            nativeControls={false}
-            contentFit='cover'
-        />
+        <VideoBackground>
+            <View style={styles.content}>
+                <Text style={styles.title}>Gde je After?</Text>
+                <Text style={styles.subtitle}>
+                    After je tu da ti pomogne da pronađeš najbolje mesto za izlazak u tvom gradu.
+                </Text>
+            </View>
+        </VideoBackground>
     );
+
 }
 
 const styles = StyleSheet.create({
-    video: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-    }
+    content: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    subtitle: {
+        fontSize: 18,
+        textAlign: 'center',
+    },
+
 });
