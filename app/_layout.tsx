@@ -1,39 +1,44 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Slot } from 'expo-router';
+import * as Font from 'expo-font';
+import { Entypo } from '@expo/vector-icons';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import '@/i18n';
+import { useCallback, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import { SessionProvider } from '@/context/SessionProvider';
+import 'react-native-reanimated';
+import '@/i18n';
+
 export { ErrorBoundary } from 'expo-router';
+
 
 SplashScreen.preventAutoHideAsync();
 
-// SplashScreen.setOptions({
-//   duration: 1000,
-//   fade: true,
-// });
-
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
+  const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    async function prepare() {
+      try {
+        await Font.loadAsync(Entypo.font);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
     }
-  }, [loaded]);
 
-  if (!loaded) {
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(() => {
+    if (appIsReady) {
+      SplashScreen.hide();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
     return null;
   }
 

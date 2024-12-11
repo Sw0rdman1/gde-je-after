@@ -1,7 +1,6 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Redirect, Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
 import { useSession } from '@/context/SessionProvider';
 import { Text } from '@/components/ui/Themed';
 import { useColors } from '@/hooks/useColors';
@@ -14,7 +13,6 @@ function TabBarIcon(props: {
 }
 
 export default function AppLayout() {
-  const colorScheme = useColorScheme();
   const { user, isLoading } = useSession();
   const { tint } = useColors();
 
@@ -23,7 +21,7 @@ export default function AppLayout() {
   }
 
   if (!user) {
-    return <Redirect href="/sign-in" />;
+    return <Redirect href="/welcome" />;
   }
 
   return (
