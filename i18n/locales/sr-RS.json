@@ -1,6 +1,9 @@
 {
     "language": "Jezik",
-    "helloWorld": "Zdravo svete!",
+    "app": {
+        "name": "Gde je After?",
+        "description": ""
+    },
     "auth": {
         "login": "Prijavi se",
         "logout": "Odjavi se",

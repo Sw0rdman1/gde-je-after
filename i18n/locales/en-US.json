@@ -1,6 +1,9 @@
 {
     "language": "Language",
-    "helloWorld": "Hello World",
+    "app": {
+        "name": "Where is After?",
+        "description": ""
+    },
     "auth": {
         "login": "Log In",
         "logout": "Log Out",

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         zIndex: 1,
     },
     video: {

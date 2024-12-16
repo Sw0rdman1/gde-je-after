@@ -1,16 +1,19 @@
-import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
-import { Text, View } from '@/components/ui/Themed';
+import { Text } from '@/components/ui/Themed';
 import VideoBackground from '@/components/ui/VideoBackground';
+import { useTranslations } from '@/hooks/useTranslations';
 import { StyleSheet } from 'react-native';
 
 
 export default function WelcomeScreen() {
+    const dictionary = useTranslations();
+
     return (
         <VideoBackground>
-            <Container alignItems='center'>
-                <Text style={styles.title}>Gde je After?</Text>
-                <Button title='Prijavi se' onPress={() => { }} />
+            <Container alignItems='center' justifyContent='center'>
+                <Text style={styles.title}>
+                    {dictionary('app.name')}
+                </Text>
             </Container>
         </VideoBackground>
     );
