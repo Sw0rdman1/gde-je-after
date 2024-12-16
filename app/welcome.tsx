@@ -1,6 +1,7 @@
 import Container from '@/components/ui/Container';
-import { Text } from '@/components/ui/Themed';
+import { MonoText } from '@/components/ui/StyledText';
 import VideoBackground from '@/components/ui/VideoBackground';
+import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
 import { StyleSheet } from 'react-native';
 
@@ -10,10 +11,10 @@ export default function WelcomeScreen() {
 
     return (
         <VideoBackground>
-            <Container alignItems='center' justifyContent='center'>
-                <Text style={styles.title}>
+            <Container alignItems='center' justifyContent='flex-end'>
+                <MonoText style={styles.title}>
                     {dictionary('app.name')}
-                </Text>
+                </MonoText>
             </Container>
         </VideoBackground>
     );
@@ -22,7 +23,7 @@ export default function WelcomeScreen() {
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 34,
+        fontSize: fontSizes.title,
         fontWeight: 'bold',
         marginBottom: 10,
     },

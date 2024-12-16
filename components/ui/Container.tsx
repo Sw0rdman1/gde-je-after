@@ -1,4 +1,4 @@
-import { FlexAlignType, StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
+import { FlexAlignType, StyleProp, View, ViewStyle } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ContainerProps {
@@ -10,6 +10,7 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ styles, alignItems, justifyContent, children }) => {
     const { top } = useSafeAreaInsets();
+
     return (
         <View style={[styles, { paddingTop: top, flex: 1, alignItems, justifyContent }]}>
             {children}
