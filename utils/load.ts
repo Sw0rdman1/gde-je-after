@@ -3,6 +3,7 @@ import { Asset } from 'expo-asset';
 
 const FONTS = {
     'shadows': require('../assets/fonts/ShadowsIntoLight-Regular.ttf'),
+    'marker': require('../assets/fonts/PermanentMarker-Regular.ttf'),
 }
 
 const loadFonts = async () => {
