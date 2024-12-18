@@ -5,6 +5,7 @@ import VideoBackground from '@/components/ui/VideoBackground';
 import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
 import LanguagePicker from '@/i18n/LanguagePicker';
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 
 
@@ -13,6 +14,7 @@ export default function WelcomeScreen() {
 
     return (
         <VideoBackground>
+            <StatusBar style='light' />
             <Container alignItems='center' justifyContent='center' styles={styles.container}>
                 <View style={styles.language}>
                     <LanguagePicker />
@@ -45,9 +47,11 @@ const styles = StyleSheet.create({
     title: {
         fontSize: fontSizes.title,
         fontWeight: 'bold',
+        color: '#FFFFFF',
     },
     subtitle: {
         fontSize: fontSizes.xLarge,
         textAlign: 'center',
+        color: '#FFFFFF',
     },
 });

@@ -2,6 +2,8 @@ import { AVAILABLE_LANGUAGES, Language } from "@/constants/languages";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React, { useState } from "react";
 import { fontSizes } from "@/constants/font";
+import { BlurView } from "expo-blur";
+
 
 const LanguagePicker: React.FC = () => {
     const [selectedLanguage, setSelectedLanguage] = useState<Language>(AVAILABLE_LANGUAGES[0]);
@@ -19,32 +21,28 @@ const LanguagePicker: React.FC = () => {
                     style={styles.dropdownButton}
                     onPress={() => setDropdownVisible(!dropdownVisible)}
                 >
-                    <Image
-                        source={selectedLanguage.flag}
-                        style={styles.image}
-                    />
+                    <Text style={styles.selectedFlag}>{selectedLanguage.flag}</Text>
 
                 </TouchableOpacity>
 
                 {dropdownVisible && (
-                    <View style={styles.dropdownMenu}>
+                    <BlurView intensity={50} tint="light" style={styles.dropdownMenu}>
                         {AVAILABLE_LANGUAGES.map((language) => (
                             <TouchableOpacity
                                 key={language.langCode}
                                 style={styles.dropdownItem}
                                 onPress={() => handleLanguageSelect(language)}
                             >
-                                <Text style={styles.languageTextMenu}>
+                                <Text style={styles.flag}>
+                                    {language.flag}
+                                </Text>
+                                <Text style={styles.languageText}>
                                     {language.name}
                                 </Text>
-                                <Image
-                                    source={language.flag}
-                                    style={styles.imageMenu}
-                                />
 
                             </TouchableOpacity>
                         ))}
-                    </View>
+                    </BlurView>
                 )}
             </View>
         </View>
@@ -57,12 +55,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "transparent",
         zIndex: 2,
-        borderRadius: 8,
-
+    },
+    selectedFlag: {
+        fontSize: fontSizes.xxxLarge,
     },
     dropdownContainer: {
         width: 100,
-        borderRadius: 8,
         backgroundColor: "transparent",
     },
     dropdownButton: {
@@ -71,35 +69,19 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         gap: 8,
         borderRadius: 8,
-        padding: 6,
     },
     languageText: {
         fontSize: fontSizes.medium,
         color: "#FFFFFF",
         fontWeight: "bold",
     },
-    image: {
-        height: 28,
-        width: 36,
-    },
-    languageTextMenu: {
-        fontSize: fontSizes.medium,
-        color: "#000",
-    },
-    imageMenu: {
-        height: 24,
-        width: 32,
-    },
     dropdownMenu: {
         position: "absolute",
         top: 50,
         left: 0,
         right: 0,
-        backgroundColor: "#fff",
-        borderWidth: 1,
-        borderColor: "#ccc",
         borderRadius: 8,
-        shadowColor: "#000",
+        shadowColor: "#ffffff",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
@@ -109,11 +91,14 @@ const styles = StyleSheet.create({
     dropdownItem: {
         flexDirection: "row",
         alignItems: "center",
-        gap: 8,
-        padding: 6,
-        paddingVertical: 8,
+        gap: 4,
+        padding: 4,
         borderBottomWidth: 1,
-        borderBottomColor: "#eee",
+        borderBottomColor: "#000",
+        borderRadius: 8,
+    },
+    flag: {
+        fontSize: fontSizes.xxLarge,
     },
 });
 

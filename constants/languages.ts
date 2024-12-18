@@ -1,11 +1,12 @@
+
 interface Language {
     langCode: string;
     name: string;
-    flag: any;
+    flag: string;
 }
 
-const serbianLanguage = { langCode: 'sr-RS', name: 'SRB', flag: require('../assets/images/flags/sr-RS.png') };
-const englishLanguage = { langCode: 'en-US', name: 'ENG', flag: require('../assets/images/flags/en-UK.png') };
+const serbianLanguage = { langCode: 'sr-RS', name: 'SRB', flag: '🇷🇸' }
+const englishLanguage = { langCode: 'en-US', name: 'ENG', flag: '🇬🇧' }
 
 const AVAILABLE_LANGUAGES = [serbianLanguage, englishLanguage];
 
