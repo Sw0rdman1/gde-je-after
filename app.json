@@ -43,13 +43,7 @@
       ],
       "expo-localization",
       "expo-secure-store",
-      [
-        "expo-video",
-        {
-          "supportsBackgroundPlayback": true,
-          "supportsPictureInPicture": true
-        }
-      ]
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true

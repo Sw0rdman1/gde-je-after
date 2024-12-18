@@ -4,39 +4,49 @@ import { useTranslations } from '@/hooks/useTranslations'
 import { fontSizes } from '@/constants/font'
 import { MonoText } from '../ui/StyledText'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { BlurView } from 'expo-blur'
+import { isEmailValid } from '@/utils/validation'
 
-const WelcomeButton = () => {
+interface WelcomeButtonProps {
+    email: string;
+}
+
+const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email }) => {
     const dictionary = useTranslations()
+    const isValid = isEmailValid(email)
 
     const handlePress = () => {
         router.push('/sign-in')
     }
 
-
     return (
-        <TouchableOpacity onPress={handlePress} style={styles.containers}>
-            <MonoText style={styles.text}>
-                {dictionary('auth.explore')}
-            </MonoText>
-            <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#212121' />
-        </TouchableOpacity >
+        <BlurView intensity={isValid ? 70 : 30} tint={"extraLight"} style={styles.blur}>
+            <TouchableOpacity onPress={handlePress} style={styles.container}>
+                <MonoText style={styles.text}>
+                    {dictionary('auth.explore')}
+                </MonoText>
+                <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#FFFFFF' />
+            </TouchableOpacity >
+        </BlurView>
     )
 }
 
 export default WelcomeButton
 
 const styles = StyleSheet.create({
-    containers: {
-        marginTop: 20,
-        backgroundColor: '#FFFFFF',
+    blur: {
+        borderRadius: 20,
+        overflow: 'hidden',
+        width: '70%',
+    },
+    container: {
         paddingVertical: 5,
-        width: '60%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 15,
         borderRadius: 20,
-        shadowColor: '#000',
+        shadowColor: '#FFFFFF',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -46,7 +56,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     text: {
-        color: '#212121',
+        color: '#FFFFFF',
         fontWeight: 'bold',
         fontSize: fontSizes.xxLarge
     }

@@ -1,5 +1,10 @@
-// App.js
 import * as Yup from 'yup'
+
+export const isEmailValid = (email: string) => {
+    if (!email) return false
+    return Yup.string().email().isValidSync(email)
+}
+
 
 export const loginValidationSchema = (dictionary: any) => Yup.object().shape({
     email: Yup.string()
