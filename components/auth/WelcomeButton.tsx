@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { router } from 'expo-router'
 import { useTranslations } from '@/hooks/useTranslations'
 import { fontSizes } from '@/constants/font'
@@ -19,15 +19,28 @@ const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email }) => {
         router.push('/sign-in')
     }
 
+    if (!isValid) {
+        return (
+            <BlurView intensity={60} tint={"light"} style={styles.blur}>
+                <TouchableOpacity disabled style={styles.container}>
+                    <MonoText style={styles.text}>
+                        {dictionary('auth.explore')}
+                    </MonoText>
+                    <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#FFFFFF' />
+                </TouchableOpacity >
+            </BlurView>
+        )
+    }
+
     return (
-        <BlurView intensity={isValid ? 70 : 30} tint={"extraLight"} style={styles.blur}>
-            <TouchableOpacity onPress={handlePress} style={styles.container}>
-                <MonoText style={styles.text}>
+        <View style={styles.blur}>
+            <TouchableOpacity onPress={handlePress} style={[styles.container, { backgroundColor: '#FFFFFF' }]}>
+                <MonoText style={[styles.text, { color: "#212121" }]}>
                     {dictionary('auth.explore')}
                 </MonoText>
-                <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#FFFFFF' />
+                <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#212121' />
             </TouchableOpacity >
-        </BlurView>
+        </View>
     )
 }
 
@@ -35,9 +48,9 @@ export default WelcomeButton
 
 const styles = StyleSheet.create({
     blur: {
-        borderRadius: 20,
+        borderRadius: 25,
         overflow: 'hidden',
-        width: '70%',
+        width: '60%',
     },
     container: {
         paddingVertical: 5,
@@ -45,7 +58,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 15,
-        borderRadius: 20,
         shadowColor: '#FFFFFF',
         shadowOffset: {
             width: 0,
