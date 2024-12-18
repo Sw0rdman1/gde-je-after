@@ -2,9 +2,10 @@
     "language": "Language",
     "app": {
         "name": "Where is After?",
-        "description": ""
+        "description": "After is where you are - discover parties nearby and join the fun!"
     },
     "auth": {
+        "explore": "Explore",
         "login": "Log In",
         "logout": "Log Out",
         "register": "Register",

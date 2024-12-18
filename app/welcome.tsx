@@ -1,3 +1,4 @@
+import WelcomeButton from '@/components/auth/WelcomeButton';
 import Container from '@/components/ui/Container';
 import { MonoText } from '@/components/ui/StyledText';
 import { View } from '@/components/ui/Themed';
@@ -15,7 +16,7 @@ export default function WelcomeScreen() {
     return (
         <VideoBackground>
             <StatusBar style='light' />
-            <Container alignItems='center' justifyContent='center' styles={styles.container}>
+            <Container alignItems='center' justifyContent='flex-end' styles={styles.container}>
                 <View style={styles.language}>
                     <LanguagePicker />
                 </View>
@@ -25,6 +26,7 @@ export default function WelcomeScreen() {
                 <MonoText style={styles.subtitle}>
                     {dictionary('app.description')}
                 </MonoText>
+                <WelcomeButton />
             </Container>
         </VideoBackground>
     );
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 24,
         gap: 20,
         zIndex: 2,
+        marginBottom: 100,
     },
     language: {
         backgroundColor: 'transparent',

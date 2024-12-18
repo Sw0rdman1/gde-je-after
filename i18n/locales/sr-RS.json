@@ -5,6 +5,7 @@
         "description": "After je tamo gde si ti - otkrij žurke u blizini i priključi se zabavi!"
     },
     "auth": {
+        "explore": "Istraži",
         "login": "Prijavi se",
         "logout": "Odjavi se",
         "register": "Registruj se",
