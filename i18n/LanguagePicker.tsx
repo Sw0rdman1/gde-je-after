@@ -1,16 +1,36 @@
 import { AVAILABLE_LANGUAGES, Language } from "@/constants/languages";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fontSizes } from "@/constants/font";
 import { BlurView } from "expo-blur";
+import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const LanguagePicker: React.FC = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState<Language>(AVAILABLE_LANGUAGES[0]);
+    const { i18n } = useTranslation();
+    const currentLanguage = i18n.language;
+    const selectedLanguage = AVAILABLE_LANGUAGES.find((lang) => lang.langCode === currentLanguage) || AVAILABLE_LANGUAGES[0];
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
+
+    useEffect(() => {
+        const loadLanguage = async () => {
+            const savedLanguage = await AsyncStorage.getItem("language");
+            if (savedLanguage) {
+                i18n.changeLanguage(savedLanguage);
+            }
+        };
+        loadLanguage();
+    }, [i18n]);
+
+    const changeLanguage = async (lang: string) => {
+        await AsyncStorage.setItem("language", lang);
+        i18n.changeLanguage(lang);
+    };
+
     const handleLanguageSelect = (language: Language) => {
-        setSelectedLanguage(language);
+        changeLanguage(language.langCode);
         setDropdownVisible(false);
     };
 
@@ -26,7 +46,7 @@ const LanguagePicker: React.FC = () => {
                 </TouchableOpacity>
 
                 {dropdownVisible && (
-                    <BlurView intensity={50} tint="light" style={styles.dropdownMenu}>
+                    <BlurView intensity={50} tint="light" style={styles.dropdownMenu} experimentalBlurMethod="dimezisBlurView">
                         {AVAILABLE_LANGUAGES.map((language) => (
                             <TouchableOpacity
                                 key={language.langCode}

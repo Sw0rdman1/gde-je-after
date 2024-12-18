@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     language: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: 50,
-        right: 10,
+        top: 60,
+        right: 15,
         zIndex: 2,
     },
     title: {
