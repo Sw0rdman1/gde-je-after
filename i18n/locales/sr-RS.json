@@ -6,8 +6,8 @@
     },
     "auth": {
         "explore": "Istraži",
-        "login": "Prijavi se",
-        "logout": "Odjavi se",
+        "log-in": "Prijavi se",
+        "log-out": "Odjavi se",
         "register": "Registruj se",
         "email": {
             "label": "Email",

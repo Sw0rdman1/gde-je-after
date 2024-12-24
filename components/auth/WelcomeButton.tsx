@@ -7,20 +7,21 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { BlurView } from 'expo-blur'
 import { isEmailValid } from '@/utils/validation'
 import { useSession } from '@/context/SessionProvider'
+import { AUTH_STATE } from '@/constants/Auth'
 
 interface WelcomeButtonProps {
     email: string;
+    setAuthState: (status: AUTH_STATE) => void;
 }
 
-const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email }) => {
+const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email, setAuthState }) => {
     const dictionary = useTranslations()
     const isValid = isEmailValid(email)
     const { checkIfEmailExists } = useSession()
 
     const handlePress = async () => {
-        // router.push('/sign-in')
-        const exists = await checkIfEmailExists(email)
-        console.log(exists)
+        const userExists = await checkIfEmailExists(email)
+        setAuthState(userExists ? AUTH_STATE.SIGN_IN : AUTH_STATE.SIGN_UP)
     }
 
     if (!isValid) {

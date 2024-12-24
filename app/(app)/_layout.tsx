@@ -21,7 +21,7 @@ export default function AppLayout() {
   }
 
   if (!user) {
-    return <Redirect href="/welcome" />;
+    return <Redirect href="/auth" />;
   }
 
   return (

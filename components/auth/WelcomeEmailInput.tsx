@@ -6,12 +6,13 @@ import { isEmailValid } from '@/utils/validation';
 
 interface WelcomeEmailInputProps {
     email: string;
-    setEmail: (email: string) => void;
+    setEmail?: (email: string) => void;
+    disabled?: boolean;
 }
 
-const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ email, setEmail }) => {
-    const backgroundColor = isEmailValid(email) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
-    const iconColor = isEmailValid(email) ? '#4CAF50' : '#FFFFFF';
+const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ email, setEmail, disabled }) => {
+    const backgroundColor = (!disabled && isEmailValid(email)) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
+    const iconColor = (!disabled && isEmailValid(email)) ? '#4CAF50' : '#FFFFFF';
 
     return (
         <View style={[styles.container, { backgroundColor }]}>
@@ -29,6 +30,7 @@ const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ email, setEmail }
                 value={email}
                 onChangeText={setEmail}
                 submitBehavior='blurAndSubmit'
+                editable={!disabled}
             />
         </View >
     )

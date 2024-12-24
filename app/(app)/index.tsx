@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-import ChangeLanguage from '@/components/ChangeLanguage';
 import { useTranslations } from '@/hooks/useTranslations';
 import { Text, View } from '@/components/ui/Themed';
 import Button from '@/components/ui/Button';
@@ -12,7 +11,6 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <ChangeLanguage />
       <Text style={styles.title}>
         {dictionary('helloWorld')}
       </Text>
