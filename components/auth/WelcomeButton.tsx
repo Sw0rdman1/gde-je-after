@@ -6,6 +6,7 @@ import { MonoText } from '../ui/StyledText'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { BlurView } from 'expo-blur'
 import { isEmailValid } from '@/utils/validation'
+import { useSession } from '@/context/SessionProvider'
 
 interface WelcomeButtonProps {
     email: string;
@@ -14,9 +15,12 @@ interface WelcomeButtonProps {
 const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email }) => {
     const dictionary = useTranslations()
     const isValid = isEmailValid(email)
+    const { checkIfEmailExists } = useSession()
 
-    const handlePress = () => {
-        router.push('/sign-in')
+    const handlePress = async () => {
+        // router.push('/sign-in')
+        const exists = await checkIfEmailExists(email)
+        console.log(exists)
     }
 
     if (!isValid) {

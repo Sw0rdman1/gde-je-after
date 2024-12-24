@@ -9,6 +9,8 @@ interface SessionContextType {
     user: User | null;
     session: Session | null;
     isLoading: boolean;
+    checkIfEmailExists: (email: string) => Promise<boolean>;
+    signUpWithEmail: (email: string, password: string, displayName: string) => Promise<string | null>;
     signInWithEmail: (email: string, password: string) => Promise<string | null>;
     signOut: () => Promise<void>;
 }
@@ -24,11 +26,35 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     const [session, setSession] = useState<Session | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    const checkIfEmailExists = async (email: string) => {
+        const { data } = await
+            supabase
+                .from('user_emails')
+                .select('email')
+                .eq('email', email)
+                .single();
+
+        return data?.email ? true : false;
+    }
+
+
     const signInWithEmail = async (email: string, password: string) => {
         const { error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
         })
+
+        return error?.code ?? null;
+    }
+
+    const signUpWithEmail = async (email: string, password: string, displayName: string) => {
+        const { error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: { data: { display_name: displayName } },
+        });
+
+
         return error?.code ?? null;
     }
 
@@ -37,7 +63,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     };
 
     const SessionContextValue: SessionContextType = {
-        user, session, isLoading, signInWithEmail, signOut
+        user, session, isLoading, checkIfEmailExists, signInWithEmail, signOut, signUpWithEmail
     };
 
     useEffect(() => {
