@@ -1,4 +1,4 @@
-import WelcomeButton from '@/components/auth/WelcomeButton';
+import AuthButton from '@/components/auth/AuthButton';
 import Container from '@/components/ui/Container';
 import { MonoText } from '@/components/ui/StyledText';
 import { View } from '@/components/ui/Themed';
@@ -8,12 +8,15 @@ import LanguagePicker from '@/i18n/LanguagePicker';
 import { StyleSheet } from 'react-native';
 import EmailInput from './EmailInput';
 import Animated, { Easing, FadeIn, FadeOut } from 'react-native-reanimated';
+import { useAuth } from '@/context/AuthProvider';
+import { isEmailValid } from '@/utils/validation';
 
 const ENTERING_ANIMATION = FadeIn.duration(300).delay(200).easing(Easing.inOut(Easing.quad))
 const EXITING_ANIMATION = FadeOut.duration(300).easing(Easing.inOut(Easing.quad))
 
 const WelcomeScreen = () => {
     const dictionary = useTranslations();
+    const { redirectUser, email } = useAuth();
 
     return (
         <Container alignItems='center' justifyContent='flex-start' >
@@ -32,7 +35,11 @@ const WelcomeScreen = () => {
                     {dictionary('app.description')}
                 </MonoText>
                 <EmailInput />
-                <WelcomeButton />
+                <AuthButton
+                    handlePress={redirectUser}
+                    title={'auth.explore'}
+                    disabled={!isEmailValid(email)}
+                />
             </Animated.View>
         </Container>
     );

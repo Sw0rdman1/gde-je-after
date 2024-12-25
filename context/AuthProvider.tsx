@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { AUTH_STATE } from "@/constants/Auth";
+import supabase from "@/config/supabase";
 
 interface AuthContextType {
     email: string;
@@ -7,6 +8,7 @@ interface AuthContextType {
     authState: AUTH_STATE;
     setAuthState: (status: AUTH_STATE) => void;
     handleBack: () => void;
+    redirectUser: () => void;
 }
 
 const SessionContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,10 +25,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setAuthState(AUTH_STATE.WELCOME);
     }
 
+    const checkIfEmailExists = async (email: string) => {
+        const { data } = await
+            supabase
+                .from('user_emails')
+                .select('email')
+                .eq('email', email)
+                .single();
+
+        return data?.email ? true : false;
+    }
+
+    const redirectUser = async () => {
+        const userExists = await checkIfEmailExists(email)
+        setAuthState(userExists ? AUTH_STATE.SIGN_IN : AUTH_STATE.SIGN_UP)
+    }
+
 
 
     const SessionContextValue: AuthContextType = {
-        email, setEmail, authState, setAuthState, handleBack
+        email, setEmail, authState, setAuthState, handleBack, redirectUser
     };
 
     return (

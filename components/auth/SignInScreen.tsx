@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         zIndex: 2,
     },
     animated: {
-        height: '70%',
+        height: '60%',
         width: '90%',
         alignItems: 'center',
         justifyContent: 'center',

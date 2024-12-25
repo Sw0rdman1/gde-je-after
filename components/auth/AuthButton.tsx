@@ -4,31 +4,23 @@ import { fontSizes } from '@/constants/font'
 import { MonoText } from '../ui/StyledText'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { BlurView } from 'expo-blur'
-import { isEmailValid } from '@/utils/validation'
-import { useSession } from '@/context/SessionProvider'
-import { AUTH_STATE } from '@/constants/Auth'
-import { useAuth } from '@/context/AuthProvider'
 
 
+interface AuthButtonProps {
+    handlePress: () => void;
+    title: string;
+    disabled?: boolean;
+}
 
-const WelcomeButton = () => {
+const AuthButton: React.FC<AuthButtonProps> = ({ handlePress, title, disabled }) => {
     const dictionary = useTranslations()
-    const { checkIfEmailExists } = useSession()
-    const { email, setAuthState } = useAuth()
 
-    const isValid = isEmailValid(email)
-
-    const handlePress = async () => {
-        const userExists = await checkIfEmailExists(email)
-        setAuthState(userExists ? AUTH_STATE.SIGN_IN : AUTH_STATE.SIGN_UP)
-    }
-
-    if (!isValid) {
+    if (disabled) {
         return (
             <BlurView intensity={60} tint={"light"} style={styles.blur}>
                 <TouchableOpacity disabled style={styles.container}>
                     <MonoText style={styles.text}>
-                        {dictionary('auth.explore')}
+                        {dictionary(title)}
                     </MonoText>
                     <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#FFFFFF' />
                 </TouchableOpacity >
@@ -39,14 +31,14 @@ const WelcomeButton = () => {
     return (
         <TouchableOpacity onPress={handlePress} style={[styles.container, { backgroundColor: '#FFFFFF' }]}>
             <MonoText style={[styles.text, { color: "#212121" }]}>
-                {dictionary('auth.explore')}
+                {dictionary(title)}
             </MonoText>
             <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#212121' />
         </TouchableOpacity >
     )
 }
 
-export default WelcomeButton
+export default AuthButton
 
 const styles = StyleSheet.create({
     blur: {

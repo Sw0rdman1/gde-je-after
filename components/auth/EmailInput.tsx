@@ -42,6 +42,7 @@ export default EmailInput
 
 const styles = StyleSheet.create({
     container: {
+        height: 50,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     icon: {
-        width: 35,
+        width: 30,
         alignItems: 'center',
         justifyContent: 'center'
     },

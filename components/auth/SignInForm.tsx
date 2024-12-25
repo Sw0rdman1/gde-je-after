@@ -10,7 +10,7 @@ import { fontSizes } from '@/constants/font'
 import { useAuth } from '@/context/AuthProvider'
 import EmailInput from './EmailInput'
 import PasswordInput from './PasswordInput'
-import WelcomeButton from './WelcomeButton'
+import AuthButton from './AuthButton'
 
 const SignInForm = () => {
     const { signInWithEmail } = useSession();
@@ -47,7 +47,10 @@ const SignInForm = () => {
                         password={values.password}
                         setPassword={handleChange('password')}
                     />
-                    <WelcomeButton />
+                    <AuthButton
+                        title='auth.log-in'
+                        handlePress={handleSubmit}
+                    />
                 </BlurView>
             )}
         </Formik>
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        gap: 20,
+        gap: 30,
         borderTopLeftRadius: 25,
         borderBottomLeftRadius: 25,
         overflow: 'hidden',
