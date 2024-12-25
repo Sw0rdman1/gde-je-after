@@ -17,5 +17,10 @@
                 "invalid": "Email nije validan"
             }
         }
+    },
+    "errors": {
+        "auth": {
+            "email_not_confirmed": "Email nije verifikovan!"
+        }
     }
 }

@@ -9,6 +9,7 @@ import 'react-native-reanimated';
 import '@/i18n';
 import { load } from '@/utils/load';
 import { AuthProvider } from '@/context/AuthProvider';
+import { ToastProvider } from '@/context/ToastContext';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -42,11 +43,13 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
-      <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-        <RootLayoutNav />
-      </View>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+          <RootLayoutNav />
+        </View>
+      </AuthProvider>
+    </ToastProvider>
   )
 }
 

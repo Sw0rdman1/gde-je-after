@@ -11,7 +11,7 @@ interface AuthContextType {
     redirectUser: () => void;
 }
 
-const SessionContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
     children: React.ReactNode;
@@ -43,19 +43,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 
 
-    const SessionContextValue: AuthContextType = {
+    const AuthContextValue: AuthContextType = {
         email, setEmail, authState, setAuthState, handleBack, redirectUser
     };
 
     return (
-        <SessionContext.Provider value={SessionContextValue}>
+        <AuthContext.Provider value={AuthContextValue}>
             {children}
-        </SessionContext.Provider>
+        </AuthContext.Provider>
     );
 };
 
 export const useAuth = () => {
-    const context = useContext(SessionContext);
+    const context = useContext(AuthContext);
     if (context === undefined) {
         throw new Error("useAuth must be used within an AuthProvider");
     }

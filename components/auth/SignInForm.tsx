@@ -11,10 +11,12 @@ import { useAuth } from '@/context/AuthProvider'
 import EmailInput from './EmailInput'
 import PasswordInput from './PasswordInput'
 import AuthButton from './AuthButton'
+import { useToast } from '@/context/ToastContext'
 
 const SignInForm = () => {
     const { signInWithEmail } = useSession();
     const { email } = useAuth();
+    const { showToast } = useToast();
     const dictionary = useTranslations();
 
     const initialValues = {
@@ -28,7 +30,7 @@ const SignInForm = () => {
         if (!error) {
             router.replace('/')
         } else {
-            console.log(error);
+            showToast(dictionary(`errors.auth.${error}`), 'error')
         }
     }
 
