@@ -1,14 +1,13 @@
 import Container from '@/components/ui/Container';
 import { MonoText } from '@/components/ui/StyledText';
-import { View } from '@/components/ui/Themed';
 import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
-import LanguagePicker from '@/i18n/LanguagePicker';
 import { BlurView } from 'expo-blur';
 import { StyleSheet } from 'react-native';
 import WelcomeEmailInput from './WelcomeEmailInput';
 import WelcomeButton from './WelcomeButton';
 import AuthBackButton from './AuthBackButton';
+import Animated, { BounceInRight, Easing, FlipInYRight, FlipOutYRight, RotateInUpRight } from 'react-native-reanimated';
 
 
 interface SignInScreenProps {
@@ -23,15 +22,21 @@ const SignInScreen: React.FC<SignInScreenProps> = ({ email, handleBack }) => {
     return (
         <Container alignItems='flex-end' justifyContent='center' styles={styles.container}>
             <AuthBackButton onPress={handleBack} />
-            <BlurView intensity={50} tint="light" style={styles.content}>
-                <MonoText style={styles.title}>
-                    {dictionary('auth.log-in')}
-                </MonoText>
-                <WelcomeEmailInput email={email} disabled />
-                <WelcomeEmailInput email={email} disabled />
-                <WelcomeButton email={email} setAuthState={() => { }} />
-            </BlurView>
-        </Container>
+            <Animated.View
+                style={styles.animated}
+                entering={FlipInYRight.duration(300).easing(Easing.inOut(Easing.quad))}
+                exiting={FlipOutYRight.duration(300).easing(Easing.inOut(Easing.quad))}
+            >
+                <BlurView intensity={50} tint="light" style={styles.content}>
+                    <MonoText style={styles.title}>
+                        {dictionary('auth.log-in')}
+                    </MonoText>
+                    <WelcomeEmailInput email={email} disabled />
+                    <WelcomeEmailInput email={email} disabled />
+                    <WelcomeButton email={email} setAuthState={() => { }} />
+                </BlurView>
+            </Animated.View>
+        </Container >
     );
 }
 
@@ -41,11 +46,17 @@ const styles = StyleSheet.create({
     container: {
         zIndex: 2,
     },
-    content: {
+    animated: {
         height: '70%',
         width: '90%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    content: {
         paddingVertical: 30,
         paddingHorizontal: 20,
+        width: '100%',
+        height: '100%',
         alignItems: 'center',
         gap: 20,
         borderTopLeftRadius: 25,
