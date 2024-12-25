@@ -8,6 +8,7 @@ import { View } from '@/components/ui/Themed';
 import 'react-native-reanimated';
 import '@/i18n';
 import { load } from '@/utils/load';
+import { AuthProvider } from '@/context/AuthProvider';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -41,9 +42,11 @@ export default function RootLayout() {
   }
 
   return (
-    <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-      <RootLayoutNav />
-    </View>
+    <AuthProvider>
+      <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+        <RootLayoutNav />
+      </View>
+    </AuthProvider>
   )
 }
 

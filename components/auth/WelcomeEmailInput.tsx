@@ -1,16 +1,16 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { fontSizes } from '@/constants/font'
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { isEmailValid } from '@/utils/validation';
+import { useAuth } from '@/context/AuthProvider';
 
 interface WelcomeEmailInputProps {
-    email: string;
-    setEmail?: (email: string) => void;
     disabled?: boolean;
 }
 
-const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ email, setEmail, disabled }) => {
+const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ disabled }) => {
+    const { email, setEmail, setAuthState } = useAuth();
+
     const backgroundColor = (!disabled && isEmailValid(email)) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
     const iconColor = (!disabled && isEmailValid(email)) ? '#4CAF50' : '#FFFFFF';
 

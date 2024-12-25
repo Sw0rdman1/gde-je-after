@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import supabase from "@/config/supabase";
-import { router } from "expo-router";
-import { Alert } from "react-native";
 
 
 interface SessionContextType {

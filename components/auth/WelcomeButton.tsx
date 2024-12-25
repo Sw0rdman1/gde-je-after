@@ -1,5 +1,4 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import { router } from 'expo-router'
 import { useTranslations } from '@/hooks/useTranslations'
 import { fontSizes } from '@/constants/font'
 import { MonoText } from '../ui/StyledText'
@@ -8,16 +7,16 @@ import { BlurView } from 'expo-blur'
 import { isEmailValid } from '@/utils/validation'
 import { useSession } from '@/context/SessionProvider'
 import { AUTH_STATE } from '@/constants/Auth'
+import { useAuth } from '@/context/AuthProvider'
 
-interface WelcomeButtonProps {
-    email: string;
-    setAuthState: (status: AUTH_STATE) => void;
-}
 
-const WelcomeButton: React.FC<WelcomeButtonProps> = ({ email, setAuthState }) => {
+
+const WelcomeButton = () => {
     const dictionary = useTranslations()
-    const isValid = isEmailValid(email)
     const { checkIfEmailExists } = useSession()
+    const { email, setAuthState } = useAuth()
+
+    const isValid = isEmailValid(email)
 
     const handlePress = async () => {
         const userExists = await checkIfEmailExists(email)

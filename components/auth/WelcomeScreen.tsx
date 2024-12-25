@@ -3,23 +3,15 @@ import WelcomeEmailInput from '@/components/auth/WelcomeEmailInput';
 import Container from '@/components/ui/Container';
 import { MonoText } from '@/components/ui/StyledText';
 import { View } from '@/components/ui/Themed';
-import { AUTH_STATE } from '@/constants/Auth';
 import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
 import LanguagePicker from '@/i18n/LanguagePicker';
 import { StyleSheet } from 'react-native';
 
 
-interface WelcomeScreenProps {
-    email: string;
-    setEmail: (email: string) => void;
-    setAuthState: (status: AUTH_STATE) => void;
-}
 
-const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ email, setEmail, setAuthState }) => {
+const WelcomeScreen = () => {
     const dictionary = useTranslations();
-
-
 
     return (
         <Container alignItems='center' justifyContent='flex-end' styles={styles.container}>
@@ -32,8 +24,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ email, setEmail, setAuthS
             <MonoText style={styles.subtitle}>
                 {dictionary('app.description')}
             </MonoText>
-            <WelcomeEmailInput email={email} setEmail={setEmail} />
-            <WelcomeButton email={email} setAuthState={setAuthState} />
+            <WelcomeEmailInput />
+            <WelcomeButton />
         </Container>
     );
 }

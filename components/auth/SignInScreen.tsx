@@ -7,17 +7,14 @@ import { StyleSheet } from 'react-native';
 import WelcomeEmailInput from './WelcomeEmailInput';
 import WelcomeButton from './WelcomeButton';
 import AuthBackButton from './AuthBackButton';
-import Animated, { BounceInRight, Easing, FlipInYRight, FlipOutYRight, RotateInUpRight } from 'react-native-reanimated';
+import Animated, { Easing, FlipInYRight, FlipOutYRight } from 'react-native-reanimated';
+import { useAuth } from '@/context/AuthProvider';
 
 
-interface SignInScreenProps {
-    email: string;
-    handleBack: () => void;
-}
 
-const SignInScreen: React.FC<SignInScreenProps> = ({ email, handleBack }) => {
+const SignInScreen = () => {
+    const { handleBack } = useAuth();
     const dictionary = useTranslations();
-
 
     return (
         <Container alignItems='flex-end' justifyContent='center' styles={styles.container}>
@@ -31,9 +28,9 @@ const SignInScreen: React.FC<SignInScreenProps> = ({ email, handleBack }) => {
                     <MonoText style={styles.title}>
                         {dictionary('auth.log-in')}
                     </MonoText>
-                    <WelcomeEmailInput email={email} disabled />
-                    <WelcomeEmailInput email={email} disabled />
-                    <WelcomeButton email={email} setAuthState={() => { }} />
+                    <WelcomeEmailInput />
+                    <WelcomeEmailInput />
+                    <WelcomeButton />
                 </BlurView>
             </Animated.View>
         </Container >
