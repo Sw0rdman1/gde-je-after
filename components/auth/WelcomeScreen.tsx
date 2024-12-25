@@ -49,9 +49,10 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 160,
         paddingHorizontal: 24,
         alignItems: 'center',
-        gap: 20,
+        gap: 30,
         zIndex: 2,
     },
     language: {

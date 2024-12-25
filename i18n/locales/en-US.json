@@ -6,8 +6,8 @@
     },
     "auth": {
         "explore": "Explore",
-        "login": "Log In",
-        "logout": "Log Out",
+        "log-in": "Log In",
+        "log-out": "Log Out",
         "register": "Register",
         "email": {
             "label": "Email",
