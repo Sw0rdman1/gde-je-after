@@ -24,10 +24,14 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     const [isLoading, setIsLoading] = useState(true);
 
     const signInWithEmail = async (email: string, password: string) => {
+        setIsLoading(true);
+
         const { error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
         })
+
+        setIsLoading(false);
 
         return error?.code ?? null;
     }

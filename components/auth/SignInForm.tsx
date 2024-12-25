@@ -22,10 +22,13 @@ const SignInForm = () => {
         password: ''
     }
 
-    const signIn = async () => {
-        const error = await signInWithEmail('vujasinovicb2019@gmail.com', 'Pass123!')
+    const signIn = async (values: { email: string, password: string }) => {
+        const error = await signInWithEmail(email, values.password)
+
         if (!error) {
             router.replace('/')
+        } else {
+            console.log(error);
         }
     }
 
@@ -50,6 +53,7 @@ const SignInForm = () => {
                     <AuthButton
                         title='auth.log-in'
                         handlePress={handleSubmit}
+                        disabled={isSubmitting || !!errors.password}
                     />
                 </BlurView>
             )}
