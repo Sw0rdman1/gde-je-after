@@ -4,17 +4,20 @@ import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
 import { BlurView } from 'expo-blur';
 import { StyleSheet } from 'react-native';
-import WelcomeEmailInput from './WelcomeEmailInput';
 import WelcomeButton from './WelcomeButton';
 import AuthBackButton from './AuthBackButton';
 import Animated, { Easing, FlipInYRight, FlipOutYRight } from 'react-native-reanimated';
 import { useAuth } from '@/context/AuthProvider';
+import EmailInput from './EmailInput';
+import PasswordInput from './PasswordInput';
+import { useState } from 'react';
 
 
 
 const SignInScreen = () => {
-    const { handleBack } = useAuth();
+    const [password, setPassword] = useState('');
     const dictionary = useTranslations();
+    const { handleBack } = useAuth();
 
     return (
         <Container alignItems='flex-end' justifyContent='center' styles={styles.container}>
@@ -25,11 +28,9 @@ const SignInScreen = () => {
                 exiting={FlipOutYRight.duration(300).easing(Easing.inOut(Easing.quad))}
             >
                 <BlurView intensity={50} tint="light" style={styles.content}>
-                    <MonoText style={styles.title}>
-                        {dictionary('auth.log-in')}
-                    </MonoText>
-                    <WelcomeEmailInput />
-                    <WelcomeEmailInput />
+                    <MonoText style={styles.title}>{dictionary('auth.log-in')}</MonoText>
+                    <EmailInput disabled />
+                    <PasswordInput password={password} setPassword={setPassword} />
                     <WelcomeButton />
                 </BlurView>
             </Animated.View>

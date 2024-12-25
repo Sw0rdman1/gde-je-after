@@ -1,42 +1,38 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import { fontSizes } from '@/constants/font'
-import Fontisto from '@expo/vector-icons/Fontisto';
 import { isEmailValid } from '@/utils/validation';
 import { useAuth } from '@/context/AuthProvider';
+import { FontAwesome5, Fontisto } from '@expo/vector-icons';
 
-interface WelcomeEmailInputProps {
-    disabled?: boolean;
+interface PasswordInputProps {
+    password: string;
+    setPassword: (password: string) => void;
 }
 
-const WelcomeEmailInput: React.FC<WelcomeEmailInputProps> = ({ disabled }) => {
-    const { email, setEmail, setAuthState } = useAuth();
-
-    const backgroundColor = (!disabled && isEmailValid(email)) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
-    const iconColor = (!disabled && isEmailValid(email)) ? '#4CAF50' : '#FFFFFF';
+const PasswordInput: React.FC<PasswordInputProps> = ({ password, setPassword }) => {
 
     return (
-        <View style={[styles.container, { backgroundColor }]}>
-            <Fontisto name="email" size={fontSizes.xxLarge} color={iconColor} />
+        <View style={styles.container}>
+            <FontAwesome5 name='lock' size={fontSizes.xxLarge} color={'#FFFFFF'} />
             <TextInput
                 style={styles.input}
-                placeholder='Email'
+                placeholder='Password'
                 placeholderTextColor='#B0BEC5'
-                keyboardType='email-address'
-                textContentType='emailAddress'
+                textContentType='password'
+                secureTextEntry={true}
                 autoCapitalize='none'
-                autoComplete='email'
+                autoComplete='password'
                 autoCorrect={false}
                 importantForAutofill='yes'
-                value={email}
-                onChangeText={setEmail}
+                value={password}
+                onChangeText={setPassword}
                 submitBehavior='blurAndSubmit'
-                editable={!disabled}
             />
         </View >
     )
 }
 
-export default WelcomeEmailInput
+export default PasswordInput
 
 const styles = StyleSheet.create({
     container: {
@@ -49,6 +45,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
     input: {
         color: '#FFFFFF',

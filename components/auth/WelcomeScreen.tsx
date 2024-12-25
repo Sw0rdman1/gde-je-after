@@ -1,5 +1,4 @@
 import WelcomeButton from '@/components/auth/WelcomeButton';
-import WelcomeEmailInput from '@/components/auth/WelcomeEmailInput';
 import Container from '@/components/ui/Container';
 import { MonoText } from '@/components/ui/StyledText';
 import { View } from '@/components/ui/Themed';
@@ -7,6 +6,7 @@ import { fontSizes } from '@/constants/font';
 import { useTranslations } from '@/hooks/useTranslations';
 import LanguagePicker from '@/i18n/LanguagePicker';
 import { StyleSheet } from 'react-native';
+import EmailInput from './EmailInput';
 
 
 
@@ -24,7 +24,7 @@ const WelcomeScreen = () => {
             <MonoText style={styles.subtitle}>
                 {dictionary('app.description')}
             </MonoText>
-            <WelcomeEmailInput />
+            <EmailInput />
             <WelcomeButton />
         </Container>
     );
