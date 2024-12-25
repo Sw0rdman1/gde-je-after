@@ -1,22 +1,14 @@
 import Container from '@/components/ui/Container';
-import { MonoText } from '@/components/ui/StyledText';
-import { fontSizes } from '@/constants/font';
-import { useTranslations } from '@/hooks/useTranslations';
-import { BlurView } from 'expo-blur';
 import { StyleSheet } from 'react-native';
-import WelcomeButton from './WelcomeButton';
 import AuthBackButton from './AuthBackButton';
 import Animated, { Easing, FlipInYRight, FlipOutYRight } from 'react-native-reanimated';
 import { useAuth } from '@/context/AuthProvider';
-import EmailInput from './EmailInput';
-import PasswordInput from './PasswordInput';
-import { useState } from 'react';
+import SignInForm from './SignInForm';
 
-
+const ENTERING_ANIMATION = FlipInYRight.duration(300).easing(Easing.inOut(Easing.quad))
+const EXITING_ANIMATION = FlipOutYRight.duration(300).easing(Easing.inOut(Easing.quad))
 
 const SignInScreen = () => {
-    const [password, setPassword] = useState('');
-    const dictionary = useTranslations();
     const { handleBack } = useAuth();
 
     return (
@@ -24,15 +16,10 @@ const SignInScreen = () => {
             <AuthBackButton onPress={handleBack} />
             <Animated.View
                 style={styles.animated}
-                entering={FlipInYRight.duration(300).easing(Easing.inOut(Easing.quad))}
-                exiting={FlipOutYRight.duration(300).easing(Easing.inOut(Easing.quad))}
+                entering={ENTERING_ANIMATION}
+                exiting={EXITING_ANIMATION}
             >
-                <BlurView intensity={50} tint="light" style={styles.content}>
-                    <MonoText style={styles.title}>{dictionary('auth.log-in')}</MonoText>
-                    <EmailInput disabled />
-                    <PasswordInput password={password} setPassword={setPassword} />
-                    <WelcomeButton />
-                </BlurView>
+                <SignInForm />
             </Animated.View>
         </Container >
     );
@@ -50,24 +37,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    content: {
-        paddingVertical: 30,
-        paddingHorizontal: 20,
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        gap: 20,
-        borderTopLeftRadius: 25,
-        borderBottomLeftRadius: 25,
-        overflow: 'hidden',
-    },
-    title: {
-        fontSize: fontSizes.title,
-        color: '#FFFFFF',
-        fontWeight: 'bold',
-    },
-    email: {
-        color: '#FFFFFF',
-        fontSize: fontSizes.xLarge,
-    }
+
 });

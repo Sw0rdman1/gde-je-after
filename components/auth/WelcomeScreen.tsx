@@ -7,25 +7,33 @@ import { useTranslations } from '@/hooks/useTranslations';
 import LanguagePicker from '@/i18n/LanguagePicker';
 import { StyleSheet } from 'react-native';
 import EmailInput from './EmailInput';
+import Animated, { Easing, FadeIn, FadeOut } from 'react-native-reanimated';
 
-
+const ENTERING_ANIMATION = FadeIn.duration(300).delay(200).easing(Easing.inOut(Easing.quad))
+const EXITING_ANIMATION = FadeOut.duration(300).easing(Easing.inOut(Easing.quad))
 
 const WelcomeScreen = () => {
     const dictionary = useTranslations();
 
     return (
-        <Container alignItems='center' justifyContent='flex-end' styles={styles.container}>
+        <Container alignItems='center' justifyContent='flex-start' >
             <View style={styles.language}>
                 <LanguagePicker />
             </View>
-            <MonoText style={styles.title}>
-                {dictionary('app.name')}
-            </MonoText>
-            <MonoText style={styles.subtitle}>
-                {dictionary('app.description')}
-            </MonoText>
-            <EmailInput />
-            <WelcomeButton />
+            <Animated.View
+                style={styles.container}
+                entering={ENTERING_ANIMATION}
+                exiting={EXITING_ANIMATION}
+            >
+                <MonoText style={styles.title}>
+                    {dictionary('app.name')}
+                </MonoText>
+                <MonoText style={styles.subtitle}>
+                    {dictionary('app.description')}
+                </MonoText>
+                <EmailInput />
+                <WelcomeButton />
+            </Animated.View>
         </Container>
     );
 }
@@ -35,9 +43,9 @@ export default WelcomeScreen;
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 24,
+        alignItems: 'center',
         gap: 20,
         zIndex: 2,
-        marginBottom: 250,
     },
     language: {
         backgroundColor: 'transparent',

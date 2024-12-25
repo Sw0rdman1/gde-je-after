@@ -1,8 +1,6 @@
 import { StyleSheet, TextInput, View } from 'react-native'
 import { fontSizes } from '@/constants/font'
-import { isEmailValid } from '@/utils/validation';
-import { useAuth } from '@/context/AuthProvider';
-import { FontAwesome5, Fontisto } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 interface PasswordInputProps {
     password: string;
@@ -13,7 +11,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, setPassword }) 
 
     return (
         <View style={styles.container}>
-            <FontAwesome5 name='lock' size={fontSizes.xxLarge} color={'#FFFFFF'} />
+            <View style={styles.icon}>
+                <FontAwesome name='lock' size={fontSizes.xxLarge} color={'#FFFFFF'} />
+            </View>
             <TextInput
                 style={styles.input}
                 placeholder='Password'
@@ -26,7 +26,6 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ password, setPassword }) 
                 importantForAutofill='yes'
                 value={password}
                 onChangeText={setPassword}
-                submitBehavior='blurAndSubmit'
             />
         </View >
     )
@@ -40,17 +39,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         gap: 10,
-        marginBlock: 20,
         width: '100%',
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
         backgroundColor: 'rgba(255, 255, 255, 0.2)',
     },
+    icon: {
+        width: 35,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     input: {
-        color: '#FFFFFF',
-        fontSize: fontSizes.xLarge,
-        fontFamily: 'shadows',
         flex: 1,
+        textAlignVertical: 'center',
+        color: '#FFFFFF',
+        fontFamily: 'shadows',
+        fontSize: fontSizes.large,
     }
 })

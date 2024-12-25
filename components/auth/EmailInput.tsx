@@ -11,12 +11,14 @@ interface EmailInputProps {
 const EmailInput: React.FC<EmailInputProps> = ({ disabled }) => {
     const { email, setEmail } = useAuth();
 
-    const backgroundColor = (!disabled && isEmailValid(email)) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
+    const backgroundColor = disabled ? 'rgba(255, 255, 255, 0.05)' : isEmailValid(email) ? '#4CAF5070' : 'rgba(255, 255, 255, 0.2)';
     const iconColor = (!disabled && isEmailValid(email)) ? '#4CAF50' : '#FFFFFF';
 
     return (
         <View style={[styles.container, { backgroundColor }]}>
-            <Fontisto name="email" size={fontSizes.xxLarge} color={iconColor} />
+            <View style={styles.icon}>
+                <Fontisto name="email" size={fontSizes.xxLarge} color={iconColor} />
+            </View>
             <TextInput
                 style={styles.input}
                 placeholder='Email'
@@ -44,11 +46,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         gap: 10,
-        marginBlock: 20,
         width: '100%',
         borderRadius: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
+    },
+    icon: {
+        width: 35,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     input: {
         color: '#FFFFFF',

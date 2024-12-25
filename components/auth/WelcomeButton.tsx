@@ -37,14 +37,12 @@ const WelcomeButton = () => {
     }
 
     return (
-        <View style={styles.blur}>
-            <TouchableOpacity onPress={handlePress} style={[styles.container, { backgroundColor: '#FFFFFF' }]}>
-                <MonoText style={[styles.text, { color: "#212121" }]}>
-                    {dictionary('auth.explore')}
-                </MonoText>
-                <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#212121' />
-            </TouchableOpacity >
-        </View>
+        <TouchableOpacity onPress={handlePress} style={[styles.container, { backgroundColor: '#FFFFFF' }]}>
+            <MonoText style={[styles.text, { color: "#212121" }]}>
+                {dictionary('auth.explore')}
+            </MonoText>
+            <FontAwesome5 name='arrow-right' size={fontSizes.large} color='#212121' />
+        </TouchableOpacity >
     )
 }
 
@@ -54,9 +52,9 @@ const styles = StyleSheet.create({
     blur: {
         borderRadius: 25,
         overflow: 'hidden',
-        width: '60%',
     },
     container: {
+        paddingHorizontal: 40,
         paddingVertical: 5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -70,6 +68,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        borderRadius: 25,
+
     },
     text: {
         color: '#FFFFFF',
