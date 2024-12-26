@@ -30,7 +30,7 @@ const SignInForm = () => {
         if (!error) {
             router.replace('/')
         } else {
-            showToast(dictionary(`errors.auth.${error}`), 'error')
+            showToast(dictionary(`auth.error.${error}`), 'error')
         }
     }
 
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        gap: 30,
+        gap: 25,
         borderTopLeftRadius: 25,
         borderBottomLeftRadius: 25,
         overflow: 'hidden',

@@ -58,11 +58,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     input: {
-        marginTop: 5,
         flex: 1,
         textAlignVertical: 'center',
         color: '#FFFFFF',
-        fontFamily: 'shadows',
         fontSize: fontSizes.large,
     }
 })

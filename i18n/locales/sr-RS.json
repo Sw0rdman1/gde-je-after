@@ -11,16 +11,10 @@
         "register": "Registruj se",
         "email": {
             "label": "Email",
-            "placeholder": "Unesite email",
-            "error": {
-                "required": "Email je obavezan",
-                "invalid": "Email nije validan"
-            }
-        }
-    },
-    "errors": {
-        "auth": {
-            "email_not_confirmed": "Email nije verifikovan!"
+            "placeholder": "Unesite email"
+        },
+        "errors": {
+            "wrong-password": "Pogrešna lozinka"
         }
     }
 }
